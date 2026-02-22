@@ -1,6 +1,5 @@
 name: Cache Demo
-
-on: [push]  # Triggers on any push
+on: [push]
 
 jobs:
   demo:
@@ -10,11 +9,11 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
       
-    - name: prime-cache-e2c0f27  # Exact name required
-      uses: actions/cache@v4     # Latest version as specified
+    - name: prime-cache-e2c0f27
+      uses: actions/cache@v4
       with:
-        key: cache-e2c0f27       # Exact key required
-        path: ~/.npm             # Example: cache npm deps (or use ~/.m2 for Maven, etc.)
+        key: cache-e2c0f27
+        path: ~/.npm
         
     - name: Demo install (uses cache)
-      run: npm ci                # Or your install command; first run downloads, later uses cache
+      run: npm ci  # Works NOW with package-lock.json
