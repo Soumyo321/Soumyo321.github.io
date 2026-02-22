@@ -1,13 +1,20 @@
-name: Hello Action with Email
+name: Cache Demo
 
-on: [push]  # Triggers on any push to any branch
+on: [push]  # Triggers on any push
 
 jobs:
-  test:
-    runs-on: ubuntu-latest  # Free Linux runner (virtual machine)
+  demo:
+    runs-on: ubuntu-latest
+    
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4  # Grabs your repo files
-
-      - name: 23f2002819@ds.study.iitm.ac.in  # Your required step name
-        run: echo "Hello from GitHub Actions! Email step complete."  # Simple command
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: prime-cache-e2c0f27  # Exact name required
+      uses: actions/cache@v4     # Latest version as specified
+      with:
+        key: cache-e2c0f27       # Exact key required
+        path: ~/.npm             # Example: cache npm deps (or use ~/.m2 for Maven, etc.)
+        
+    - name: Demo install (uses cache)
+      run: npm ci                # Or your install command; first run downloads, later uses cache
